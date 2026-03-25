@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Athena — Jonas Aksel Billeskov</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Noto+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f6fa;
+      --white: #ffffff;
+      --ink: #2d3142;
+      --muted: #000000;
+      --accent: #f57739;
+      --border: #e6e8f0;
+    }
+
+    html { font-size: 18px; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Noto Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* ── Nav ── */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    nav { display: flex; align-items: center; gap: 2rem; }
+
+    nav a {
+      font-size: 0.82rem;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 400;
+      transition: color 0.15s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    /* ── Container ── */
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* ── Back link ── */
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: color 0.15s;
+      letter-spacing: 0.04em;
+    }
+
+    .back:hover { color: var(--accent); }
+
+    /* ── Banner ── */
+    .project-banner {
+      width: 100%;
+      height: 220px;
+      border-radius: 8px;
+      background: #eef0f7;
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-banner::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 45%; height: 60%;
+      background: var(--accent);
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+      opacity: 0.8;
+    }
+
+    .project-banner.color-green  { background: #5cb87a; }
+    .project-banner.color-blue   { background: #6fa8dc; }
+    .project-banner.color-purple { background: #8e82c3; }
+    .project-banner.color-teal   { background: #5baeb0; }
+    .project-banner.color-slate  { background: #8fa4b8; }
+
+    .project-banner.color-green::after,
+    .project-banner.color-blue::after,
+    .project-banner.color-purple::after,
+    .project-banner.color-teal::after,
+    .project-banner.color-slate::after { display: none; }
+
+    /* ── Meta ── */
+    .project-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .project-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .project-date { font-size: 0.68rem; color: var(--muted); }
+
+    /* ── Title ── */
+    .project-title {
+      font-size: 2rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Description ── */
+    .project-desc {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    /* ── Video ── */
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      margin-bottom: 2.5rem;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+
+    /* ── Screenshots ── */
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .screenshots img {
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    /* Single screenshot spans full width */
+    .screenshots img:only-child {
+      grid-column: 1 / -1;
+    }
+
+    /* ── Bullet points ── */
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .bullet-list li {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.7;
+      display: flex;
+      gap: 0.7rem;
+    }
+
+    .bullet-list li::before {
+      content: '—';
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    /* ── Links ── */
+    .project-links {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .proj-btn {
+      font-size: 0.75rem;
+      padding: 0.55rem 1.2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .proj-btn-primary { background: var(--accent); color: #fff; }
+    .proj-btn-primary:hover { background: #d97a52; }
+
+    .proj-btn-ghost {
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: transparent;
+    }
+
+    .proj-btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.68rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      header { padding: 0 1.2rem; }
+      .container { padding: 2rem 1.2rem 4rem; }
+      .project-title { font-size: 1.5rem; }
+      .screenshots { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="logo" href="../index.html">Jonas Aksel Billeskov</a>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../index.html">About</a>
+      <a href="../index.html">Experience</a>
+      <a href="mailto:jonas.aksel@gmail.com">Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <a class="back" href="../index.html">← Back to projects</a>
+
+    <!-- Change color class to match the card on the home page -->
+    <div class="project-banner" style="background-image: url('../images/athena.jpg'); background-size: cover; background-position: center;"></div>
+    <div class="project-meta">
+      <span class="project-tag">Engineering</span>
+      <span class="project-date">2025-2026</span>
+    </div>
+
+    <h1 class="project-title">Project Athena</h1>
+
+    <!-- ── Description ── -->
+    <p class="project-desc">
+      Worked as Engineer and producer on Project Athena, an ambitious Tactical FPS made in Unreal Engine. Project was spearheaded by industry veterans and inspired by games like Counter Strike and Valorant, with a focus on tight gunplay, strategic depth, and competitive multiplayer.
+      I contributed to rendering and live operations, helping to shape the game from early prototypes through to early access.
+    </p>
+
+    <!-- ── Highlights ── -->
+    <div class="section-label">Highlights</div>
+    <ul class="bullet-list">
+      <li>Streamlined development workflow, reducing iteration time by focusing on measurable impact and results.  </li>
+      <li>Led team to deliver key features on time.  </li>
+      <li>Hands on developement of shaders and rendering pipelines. </li>
+    </ul>
+
+    <!-- ── Screenshots ── (add/remove <img> tags as needed) -->
+    <div class="section-label">Screenshots</div>
+    <div class="screenshots">
+      <img src="../images/Athena1.jpg" alt="Screenshot 1" />
+      <img src="../images/Athena2.jpg" alt="Screenshot 2" />
+    </div>
+
+    <!-- ── Links ── (remove buttons you don't need) -->
+    <div class="project-links">
+      <a href="https://your-live-site.com" target="_blank" class="proj-btn proj-btn-primary">Live site ↗</a>
+      <a href="https://github.com/yourusername/project-one" target="_blank" class="proj-btn proj-btn-ghost">GitHub ↗</a>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Your Name &nbsp;·&nbsp;
+      <a href="https://github.com/axksel" target="_blank">GitHub</a> &nbsp;·&nbsp;
+      <a href="https://www.linkedin.com/in/jonas-aksel-billeskov-66a07a130/" target="_blank">LinkedIn</a>
+    </p>
+  </footer>
+
+</body>
+</html>
