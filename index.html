@@ -1,503 +1,598 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Name — Developer & Product Manager</title>
+  <title>Your Name — Developer & PM</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Noto+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #f7f5f2;
-      --ink: #1a1a18;
-      --muted: #8a8880;
-      --accent: #c94a2a;
-      --rule: #e0ddd9;
-      --card-bg: #ffffff;
-      --max-w: 720px;
+      --bg: #f5f6fa;
+      --white: #ffffff;
+      --ink: #2d3142;
+      --muted: #9a9baa;
+      --accent: #e8956d;
+      --border: #e6e8f0;
     }
 
-    html { font-size: 16px; scroll-behavior: smooth; }
+    html { font-size: 15px; }
 
     body {
       background: var(--bg);
       color: var(--ink);
-      font-family: 'DM Mono', monospace;
+      font-family: 'Noto Sans', sans-serif;
       font-weight: 300;
-      line-height: 1.7;
-      padding: 0 1.5rem;
-    }
-
-    /* ── Layout ── */
-    .container {
-      max-width: var(--max-w);
-      margin: 0 auto;
+      min-height: 100vh;
     }
 
     /* ── Nav ── */
-    nav {
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 3rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 2rem 0;
-      border-bottom: 1px solid var(--rule);
-      margin-bottom: 5rem;
+      justify-content: space-between;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .nav-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem;
+    .logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
       color: var(--ink);
       text-decoration: none;
-      letter-spacing: -0.01em;
+      letter-spacing: 0.01em;
     }
 
-    .nav-links {
+    nav {
       display: flex;
+      align-items: center;
       gap: 2rem;
-      list-style: none;
     }
 
-    .nav-links a {
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
+    nav a {
+      font-size: 0.82rem;
+      color: var(--ink);
       text-decoration: none;
-      transition: color 0.2s;
+      font-weight: 400;
+      transition: color 0.15s;
     }
 
-    .nav-links a:hover { color: var(--ink); }
+    nav a:hover, nav a.active { color: var(--accent); }
+
+    /* ── Page wrapper ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+    }
+
+    /* ── Card grid ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 24px rgba(0,0,0,0.11);
+      transform: translateY(-2px);
+    }
+
+    /* Card image area with diagonal accent */
+    .card-image {
+      position: relative;
+      height: 160px;
+      overflow: hidden;
+    }
+
+    .card-image-bg {
+      position: absolute;
+      inset: 0;
+      background: #eef0f7;
+    }
+
+    /* Diagonal accent triangle */
+    .card-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 55%;
+      height: 65%;
+      background: var(--accent);
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+      opacity: 0.85;
+    }
+
+    /* Color variants for card tops */
+    .card-image.color-green .card-image-bg { background: #5cb87a; }
+    .card-image.color-blue .card-image-bg { background: #6fa8dc; }
+    .card-image.color-purple .card-image-bg { background: #8e82c3; }
+    .card-image.color-teal .card-image-bg { background: #5baeb0; }
+    .card-image.color-slate .card-image-bg { background: #8fa4b8; }
+    .card-image.color-default .card-image-bg { background: #eef0f7; }
+
+    /* When there's a color fill, hide triangle */
+    .card-image.color-green::after,
+    .card-image.color-blue::after,
+    .card-image.color-purple::after,
+    .card-image.color-teal::after,
+    .card-image.color-slate::after { display: none; }
+
+    .card-body {
+      padding: 1rem 1.1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-label {
+      font-size: 0.65rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    .card-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+      transition: color 0.15s;
+    }
+
+    .card:hover .card-title { color: var(--accent); }
+
+    .card-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 0.8rem;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.65rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 0.7rem;
+      margin-top: auto;
+    }
+
+    .card-tag {
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .card-icon {
+      width: 22px;
+      height: 26px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      color: var(--muted);
+    }
 
     /* ── Hero ── */
     .hero {
-      margin-bottom: 6rem;
-    }
-
-    .hero-eyebrow {
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-    }
-
-    .hero h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.8rem, 7vw, 4.5rem);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
-      color: var(--ink);
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .hero-bio {
-      font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 520px;
-      margin-bottom: 2.5rem;
-      line-height: 1.8;
-    }
-
-    .hero-links {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-block;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.65rem 1.4rem;
-      border: 1px solid var(--ink);
-      color: var(--ink);
-      text-decoration: none;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .btn:hover { background: var(--ink); color: var(--bg); }
-
-    .btn-ghost {
-      border-color: var(--rule);
-      color: var(--muted);
-    }
-
-    .btn-ghost:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-
-    /* ── Sections ── */
-    section {
-      margin-bottom: 6rem;
-    }
-
-    .section-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      border-top: 1px solid var(--rule);
-      padding-top: 1.2rem;
-      margin-bottom: 2.5rem;
-    }
-
-    /* ── About ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-    }
-
-    .about-text p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 1rem;
-      line-height: 1.9;
-    }
-
-    .about-text p strong {
-      color: var(--ink);
-      font-weight: 500;
-    }
-
-    .about-skills h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1rem;
-      font-weight: 400;
-      margin-bottom: 1rem;
-      color: var(--ink);
-    }
-
-    .skill-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .skill-list li {
-      font-size: 0.78rem;
-      color: var(--muted);
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 2.2rem 3rem;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-    }
-
-    .skill-list li::before {
-      content: '—';
-      color: var(--accent);
-      font-size: 0.7rem;
-    }
-
-    /* ── Projects ── */
-    .projects-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      border-top: 1px solid var(--rule);
-    }
-
-    .project-item {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: start;
+      justify-content: space-between;
       gap: 2rem;
-      padding: 1.8rem 0;
-      border-bottom: 1px solid var(--rule);
-      text-decoration: none;
-      color: inherit;
-      transition: background 0.15s;
-      cursor: pointer;
     }
 
-    .project-item:hover .project-title { color: var(--accent); }
+    .hero-left { max-width: 820px; }
 
-    .project-tag {
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
+    .hero-greeting {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 0.5rem;
     }
 
-    .project-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.25rem;
-      font-weight: 400;
-      margin-bottom: 0.4rem;
-      transition: color 0.2s;
+    .hero h1 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin-bottom: 0.7rem;
     }
 
-    .project-desc {
-      font-size: 0.8rem;
-      color: var(--muted);
-      max-width: 480px;
-      line-height: 1.7;
-    }
-
-    .project-arrow {
-      font-size: 1.2rem;
-      color: var(--muted);
-      padding-top: 0.2rem;
-      transition: transform 0.2s, color 0.2s;
-    }
-
-    .project-item:hover .project-arrow {
-      transform: translate(3px, -3px);
-      color: var(--accent);
-    }
-
-    /* ── Experience ── */
-    .exp-list {
-      display: flex;
-      flex-direction: column;
-      gap: 2.5rem;
-    }
-
-    .exp-item {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 2rem;
-    }
-
-    .exp-date {
-      font-size: 0.72rem;
-      color: var(--muted);
-      padding-top: 0.15rem;
-      letter-spacing: 0.04em;
-    }
-
-    .exp-role {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem;
-      font-weight: 400;
-      margin-bottom: 0.2rem;
-    }
-
-    .exp-company {
-      font-size: 0.78rem;
-      color: var(--accent);
-      margin-bottom: 0.6rem;
-      letter-spacing: 0.04em;
-    }
-
-    .exp-desc {
+    .hero p {
       font-size: 0.82rem;
       color: var(--muted);
       line-height: 1.8;
+      max-width: 800px;
     }
+
+    .hero-links {
+      display: flex;
+      gap: 0.7rem;
+      margin-top: 1.2rem;
+    }
+
+    .hero-btn {
+      font-size: 0.72rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: 4px;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .hero-btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .hero-btn-primary:hover { background: #d97a52; }
+
+    .hero-btn-ghost {
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: transparent;
+    }
+
+    .hero-btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e0d8cf 0%, #c8bfb4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: #a09890;
+      flex-shrink: 0;
+    }
+
+    /* hide hero on non-home pages */
+    .hero { display: flex; }
+
+    /* ── About page ── */
+    .about-wrap {
+      max-width: 680px;
+    }
+
+    .about-wrap h1 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .about-wrap p {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
+    }
+
+    .about-wrap strong { color: var(--ink); font-weight: 500; }
+
+    .skill-section { margin-top: 2rem; }
+
+    .skill-section h2 {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.5rem; }
+
+    .skill-tag {
+      font-size: 0.7rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.7rem;
+      border-radius: 3px;
+      color: #666;
+    }
+
+    /* ── Experience page ── */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+    .exp-card {
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.3rem;
+    }
+
+    .exp-role {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .exp-date { font-size: 0.7rem; color: var(--muted); }
+
+    .exp-company {
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    .exp-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.8; }
 
     /* ── Footer ── */
     footer {
-      border-top: 1px solid var(--rule);
-      padding: 2.5rem 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 3rem;
-    }
-
-    footer p {
-      font-size: 0.72rem;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.68rem;
       color: var(--muted);
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
     }
 
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .footer-links a {
-      font-size: 0.72rem;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.08em;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: var(--ink); }
-
-    /* ── Fade-in animation ── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(18px);
-      animation: fadeUp 0.6s ease forwards;
-    }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .fade-up:nth-child(1) { animation-delay: 0.05s; }
-    .fade-up:nth-child(2) { animation-delay: 0.15s; }
-    .fade-up:nth-child(3) { animation-delay: 0.25s; }
-    .fade-up:nth-child(4) { animation-delay: 0.35s; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
 
     /* ── Responsive ── */
-    @media (max-width: 600px) {
-      nav { flex-direction: column; gap: 1rem; align-items: flex-start; margin-bottom: 3rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .exp-item { grid-template-columns: 1fr; gap: 0.3rem; }
-      footer { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    @media (max-width: 768px) {
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+      header { padding: 0 1.2rem; }
+    }
+
+    @media (max-width: 500px) {
+      .card-grid { grid-template-columns: 1fr; }
+      nav { gap: 1rem; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
 
-    <!-- Nav -->
+  <header>
+    <a class="logo" href="#">YourName</a>
     <nav>
-      <a href="#" class="nav-logo">Your Name</a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="mailto:you@email.com">Contact</a></li>
-      </ul>
+      <a href="#" class="active" data-page="projects">Home</a>
+      <a href="#" data-page="about">About</a>
+      <a href="#" data-page="experience">Experience</a>
+      <a href="/cdn-cgi/l/email-protection#1960766c597c74787075377a7674">Contact</a>
     </nav>
+  </header>
 
-    <!-- Hero -->
-    <section class="hero">
-      <p class="hero-eyebrow fade-up">Developer & Product Manager</p>
-      <h1 class="fade-up">
-        Building things<br>that <em>actually</em><br>get used.
-      </h1>
-      <p class="hero-bio fade-up">
-        I sit at the intersection of code and product — shipping software, defining what to build next, and keeping both in sync.
-        Currently based in <strong>Copenhagen</strong>. Open to new opportunities.
-      </p>
-      <div class="hero-links fade-up">
-        <a href="#projects" class="btn">View Projects</a>
-        <a href="https://github.com/yourusername" class="btn btn-ghost" target="_blank">GitHub ↗</a>
-        <a href="https://linkedin.com/in/yourprofile" class="btn btn-ghost" target="_blank">LinkedIn ↗</a>
+  <!-- Hero -->
+  <div class="hero" id="hero">
+    <div class="hero-left">
+      <div class="hero-greeting">Game Developer and Lead · Copenhagen</div>
+      <h1>Hi, I'm Jonas Aksel Billeskov.<br><!-- EMPTY --></h1>
+      <p>Game Developer with deep expertise in gameplay, rendering, and multiplayer systems, with strong C#, C++,  
+         HLSL and JavaScript experience. I started my career writing gameplay systems, procedural generation 
+         systems, engine tooling and shaders - then leading game development as a technical and game lead, which 
+         gave me a broad understanding of the full development cycle. From low-level rendering to player-facing 
+         systems to live game performance. I'm returning to a hands-on development role because it's where I do my 
+         most satisfying work. </p>
+      <div class="hero-links">
+        <a href="/cdn-cgi/l/email-protection#156c7a60557078747c793b767a78" class="hero-btn hero-btn-primary">Get in touch</a>
+        <a href="https://github.com/axksel" target="_blank" class="hero-btn hero-btn-ghost">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/jonas-aksel-billeskov-66a07a130/" target="_blank" class="hero-btn hero-btn-ghost">LinkedIn ↗</a>
       </div>
-    </section>
+    </div>
+    <div class="hero-avatar">YN</div>
+  </div>
 
-    <!-- About -->
-    <section id="about">
-      <p class="section-label">About</p>
-      <div class="about-grid">
-        <div class="about-text">
-          <p>
-            I'm a <strong>developer and product manager</strong> with experience taking products from idea to launch. I write code, talk to users, and define roadmaps — sometimes all in the same week.
-          </p>
-          <p>
-            I care about shipping things that solve real problems, not just feature checklists. I've worked across early-stage startups and larger teams, and I'm comfortable being the person who bridges engineering and the rest of the business.
-          </p>
-          <p>
-            Outside of work I'm into <strong>[your interests here]</strong>.
-          </p>
+  <!-- Projects / Home -->
+  <div class="page active" id="projects">
+    <div class="container">
+      <div class="card-grid">
+
+        <a href="projects/project-one.html" class="card">
+          <div class="card-image color-default"></div>
+          <div class="card-body">
+            <div class="card-label">Original</div>
+            <div class="card-title">Project One — a short punchy title</div>
+            <div class="card-desc">What it does and the problem it solves. Keep this to one or two sentences.</div>
+            <div class="card-footer">
+              <span>2024 &nbsp; <span class="card-tag">Engineering</span></span>
+              <div class="card-icon">&#9638;</div>
+            </div>
+          </div>
+        </a>
+
+        <a href="projects/project-two.html" class="card">
+          <div class="card-image color-default"></div>
+          <div class="card-body">
+            <div class="card-label">Original</div>
+            <div class="card-title">Project Two — another great project</div>
+            <div class="card-desc">What you built, why, and what you learned. Stack or tools can go here.</div>
+            <div class="card-footer">
+              <span>2024 &nbsp; <span class="card-tag">Product</span></span>
+              <div class="card-icon">&#9638;</div>
+            </div>
+          </div>
+        </a>
+
+        <a href="projects/project-three.html" class="card">
+          <div class="card-image color-green"></div>
+          <div class="card-body">
+            <div class="card-label">Original</div>
+            <div class="card-title">Project Three — open source tool</div>
+            <div class="card-desc">Brief description. Link to GitHub repo or live demo.</div>
+            <div class="card-footer">
+              <span>2023 &nbsp; <span class="card-tag">Open Source</span></span>
+              <div class="card-icon">&#9638;</div>
+            </div>
+          </div>
+        </a>
+
+        <a href="projects/project-four.html" class="card">
+          <div class="card-image color-blue"></div>
+          <div class="card-body">
+            <div class="card-label">Original</div>
+            <div class="card-title">Project Four — side project</div>
+            <div class="card-desc">What you built on your own time and why it mattered to you.</div>
+            <div class="card-footer">
+              <span>2023 &nbsp; <span class="card-tag">Side Project</span></span>
+              <div class="card-icon">&#9638;</div>
+            </div>
+          </div>
+        </a>
+
+        <a href="projects/project-five.html" class="card">
+          <div class="card-image color-default"></div>
+          <div class="card-body">
+            <div class="card-label">Original</div>
+            <div class="card-title">Project Five — another one</div>
+            <div class="card-desc">Short description of what this project achieved.</div>
+            <div class="card-footer">
+              <span>2022 &nbsp; <span class="card-tag">Engineering</span></span>
+              <div class="card-icon">&#9638;</div>
+            </div>
+          </div>
+        </a>
+
+        <a href="projects/project-six.html" class="card">
+          <div class="card-image color-default"></div>
+          <div class="card-body">
+            <div class="card-label">Original</div>
+            <div class="card-title">Project Six — and one more</div>
+            <div class="card-desc">Brief description. Link to write-up or case study.</div>
+            <div class="card-footer">
+              <span>2022 &nbsp; <span class="card-tag">Product</span></span>
+              <div class="card-icon">&#9638;</div>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <div class="page" id="about">
+    <div class="container">
+      <div class="about-wrap">
+        <h1>About me</h1>
+        <p>I'm a <strong>developer and product manager</strong> based in Copenhagen. I work at the intersection of engineering and product — writing code, talking to users, and shaping roadmaps.</p>
+        <p>I've worked across <strong>early-stage startups</strong> and larger teams. I care more about outcomes than process, and I'm most at home bridging the gap between what's technically possible and what users actually need.</p>
+        <p>Outside of work I'm into <strong>[your interests here]</strong>.</p>
+
+        <div class="skill-section">
+          <h2>Technical</h2>
+          <div class="skill-tags">
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Git / CI-CD</span>
+          </div>
+          <h2>Product</h2>
+          <div class="skill-tags">
+            <span class="skill-tag">Roadmapping</span>
+            <span class="skill-tag">User research</span>
+            <span class="skill-tag">Data analysis</span>
+            <span class="skill-tag">Stakeholder mgmt</span>
+            <span class="skill-tag">Agile / Scrum</span>
+          </div>
         </div>
-        <div class="about-skills">
-          <h3>Technical</h3>
-          <ul class="skill-list" style="margin-bottom: 1.5rem;">
-            <li>JavaScript / TypeScript</li>
-            <li>React / Node.js</li>
-            <li>Python</li>
-            <li>SQL & databases</li>
-            <li>Git & CI/CD</li>
-          </ul>
-          <h3>Product</h3>
-          <ul class="skill-list">
-            <li>Roadmap planning</li>
-            <li>User research</li>
-            <li>Stakeholder management</li>
-            <li>Data analysis</li>
-            <li>Agile / Scrum</li>
-          </ul>
-        </div>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- Projects -->
-    <section id="projects">
-      <p class="section-label">Selected Projects</p>
-      <div class="projects-list">
-
-        <a href="#" class="project-item">
-          <div>
-            <p class="project-tag">Product + Engineering</p>
-            <h3 class="project-title">Project One</h3>
-            <p class="project-desc">A short description of what the project does, the problem it solves, and the outcome. Keep it punchy — one or two sentences.</p>
-          </div>
-          <span class="project-arrow">↗</span>
-        </a>
-
-        <a href="#" class="project-item">
-          <div>
-            <p class="project-tag">Side Project</p>
-            <h3 class="project-title">Project Two</h3>
-            <p class="project-desc">What you built, why you built it, and what you learned. Tech stack or tools used can go here too.</p>
-          </div>
-          <span class="project-arrow">↗</span>
-        </a>
-
-        <a href="#" class="project-item">
-          <div>
-            <p class="project-tag">Open Source</p>
-            <h3 class="project-title">Project Three</h3>
-            <p class="project-desc">Brief description. Link to GitHub, live demo, or case study write-up.</p>
-          </div>
-          <span class="project-arrow">↗</span>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience">
-      <p class="section-label">Work Experience</p>
+  <!-- Experience -->
+  <div class="page" id="experience">
+    <div class="container">
       <div class="exp-list">
 
-        <div class="exp-item">
-          <span class="exp-date">2022 — Present</span>
-          <div>
-            <h3 class="exp-role">Senior Product Manager</h3>
-            <p class="exp-company">Company Name</p>
-            <p class="exp-desc">What you worked on, what you shipped, what impact it had. Quantify where you can — users, revenue, time saved. 2–3 sentences is plenty.</p>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="exp-role">Senior Product Manager</div>
+            <div class="exp-date">2022 — Present</div>
           </div>
+          <div class="exp-company">Company Name</div>
+          <div class="exp-desc">What you worked on, what you shipped, and the impact it had. Quantify where you can — users, revenue, time saved. Two or three sentences.</div>
         </div>
 
-        <div class="exp-item">
-          <span class="exp-date">2019 — 2022</span>
-          <div>
-            <h3 class="exp-role">Full Stack Developer</h3>
-            <p class="exp-company">Another Company</p>
-            <p class="exp-desc">Stack, scale, and scope. What problems you solved and how you grew. Focus on outcomes, not just responsibilities.</p>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="exp-role">Full Stack Developer</div>
+            <div class="exp-date">2019 — 2022</div>
           </div>
+          <div class="exp-company">Another Company</div>
+          <div class="exp-desc">Stack, scale, and scope. What problems you solved and how you grew. Focus on outcomes over responsibilities.</div>
         </div>
 
-        <div class="exp-item">
-          <span class="exp-date">2017 — 2019</span>
-          <div>
-            <h3 class="exp-role">Junior Developer</h3>
-            <p class="exp-company">Earlier Company</p>
-            <p class="exp-desc">Where you started, what you learned, and how you levelled up.</p>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="exp-role">Junior Developer</div>
+            <div class="exp-date">2017 — 2019</div>
           </div>
+          <div class="exp-company">Earlier Company</div>
+          <div class="exp-desc">Where you started and what you learned.</div>
         </div>
 
       </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-      <p>© 2026 Your Name</p>
-      <div class="footer-links">
-        <a href="mailto:you@email.com">Email</a>
-        <a href="https://github.com/yourusername" target="_blank">GitHub</a>
-        <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
-      </div>
-    </footer>
-
+    </div>
   </div>
-</body>
-</html>
+
+  <footer>
+    <p>© 2026 Your Name &nbsp;·&nbsp;
+      <a href="https://github.com/yourusername" target="_blank">GitHub</a> &nbsp;·&nbsp;
+      <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
+      <a href="/cdn-cgi/l/email-protection#067f697346636b676f6a2865696b">Email</a>
+    </p>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const navLinks = document.querySelectorAll('nav a[data-page]');
+    const pages = document.querySelectorAll('.page');
+    const hero = document.getElementById('hero');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = link.dataset.page;
+        navLinks.forEach(l => l.classList.remove('active'));
+        pages.forEach(p => p.classList.remove('active'));
+        link.classList.add('active');
