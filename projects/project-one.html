@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+{<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Project One — Your Name</title>
+  <title>WORLDS FRVR — Jonas Aksel Billeskov</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Noto+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -14,8 +14,8 @@
       --bg: #f5f6fa;
       --white: #ffffff;
       --ink: #2d3142;
-      --muted: #9a9baa;
-      --accent: #e8956d;
+      --muted: #000000;
+      --accent: #f57739;
       --border: #e6e8f0;
     }
 
@@ -43,22 +43,6 @@
       z-index: 100;
     }
 
-    .video-wrap {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 ratio */
-      height: 0;
-      margin-bottom: 2rem;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .video-wrap iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
     .logo {
       font-family: 'Dancing Script', cursive;
       font-size: 1.8rem;
@@ -78,7 +62,7 @@
 
     nav a:hover { color: var(--accent); }
 
-    /* ── Page ── */
+    /* ── Container ── */
     .container {
       max-width: 780px;
       margin: 0 auto;
@@ -100,7 +84,7 @@
 
     .back:hover { color: var(--accent); }
 
-    /* ── Hero banner ── */
+    /* ── Banner ── */
     .project-banner {
       width: 100%;
       height: 220px;
@@ -111,25 +95,21 @@
       overflow: hidden;
     }
 
-    /* Diagonal accent — same style as index cards */
     .project-banner::after {
       content: '';
       position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 45%;
-      height: 60%;
+      bottom: 0; right: 0;
+      width: 45%; height: 60%;
       background: var(--accent);
       clip-path: polygon(100% 0, 100% 100%, 0 100%);
       opacity: 0.8;
     }
 
-    /* Color variants — copy the class from the card in index.html */
-    .project-banner.color-green { background: #5cb87a; }
-    .project-banner.color-blue  { background: #6fa8dc; }
+    .project-banner.color-green  { background: #5cb87a; }
+    .project-banner.color-blue   { background: #6fa8dc; }
     .project-banner.color-purple { background: #8e82c3; }
-    .project-banner.color-teal  { background: #5baeb0; }
-    .project-banner.color-slate { background: #8fa4b8; }
+    .project-banner.color-teal   { background: #5baeb0; }
+    .project-banner.color-slate  { background: #8fa4b8; }
 
     .project-banner.color-green::after,
     .project-banner.color-blue::after,
@@ -137,7 +117,7 @@
     .project-banner.color-teal::after,
     .project-banner.color-slate::after { display: none; }
 
-    /* ── Meta row ── */
+    /* ── Meta ── */
     .project-meta {
       display: flex;
       align-items: center;
@@ -153,10 +133,7 @@
       color: var(--accent);
     }
 
-    .project-date {
-      font-size: 0.68rem;
-      color: var(--muted);
-    }
+    .project-date { font-size: 0.68rem; color: var(--muted); }
 
     /* ── Title ── */
     .project-title {
@@ -164,53 +141,87 @@
       font-weight: 500;
       letter-spacing: -0.02em;
       line-height: 1.25;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.5rem;
     }
 
-    /* ── Summary ── */
-    .project-summary {
-      font-size: 1rem;
+    /* ── Description ── */
+    .project-desc {
+      font-size: 0.88rem;
       color: #555;
-      line-height: 1.85;
+      line-height: 1.9;
       margin-bottom: 2.5rem;
-      border-left: 3px solid var(--accent);
-      padding-left: 1.1rem;
     }
 
-    /* ── Body sections ── */
-    .project-section {
-      margin-bottom: 2.2rem;
-    }
-
-    .project-section h2 {
+    /* ── Section label ── */
+    .section-label {
       font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
       border-bottom: 1px solid var(--border);
       padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
 
-    .project-section p {
+    /* ── Video ── */
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      margin-bottom: 2.5rem;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+
+    /* ── Screenshots ── */
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .screenshots img {
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    /* Single screenshot spans full width */
+    .screenshots img:only-child {
+      grid-column: 1 / -1;
+    }
+
+    /* ── Bullet points ── */
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .bullet-list li {
       font-size: 0.85rem;
       color: #555;
-      line-height: 1.9;
-      margin-bottom: 0.8rem;
+      line-height: 1.7;
+      display: flex;
+      gap: 0.7rem;
     }
 
-    .project-section strong { color: var(--ink); font-weight: 500; }
-
-    /* ── Stack tags ── */
-    .stack-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
-
-    .stack-tag {
-      font-size: 0.7rem;
-      background: var(--white);
-      border: 1px solid var(--border);
-      padding: 0.25rem 0.7rem;
-      border-radius: 3px;
-      color: #666;
+    .bullet-list li::before {
+      content: '—';
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 0.05rem;
     }
 
     /* ── Links ── */
@@ -218,7 +229,8 @@
       display: flex;
       gap: 0.8rem;
       flex-wrap: wrap;
-      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
     }
 
     .proj-btn {
@@ -258,6 +270,7 @@
       header { padding: 0 1.2rem; }
       .container { padding: 2rem 1.2rem 4rem; }
       .project-title { font-size: 1.5rem; }
+      .screenshots { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -267,8 +280,8 @@
     <a class="logo" href="../index.html">YourName</a>
     <nav>
       <a href="../index.html">Home</a>
-      <a href="../index.html#about">About</a>
-      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html">About</a>
+      <a href="../index.html">Experience</a>
       <a href="mailto:you@email.com">Contact</a>
     </nav>
   </header>
@@ -277,66 +290,53 @@
 
     <a class="back" href="../index.html">← Back to projects</a>
 
-    <!-- Banner: change class to color-green, color-blue, etc. to match the card -->
-    <div class="project-banner color-default"></div>
+    <!-- Change color class to match the card on the home page -->
+    <div class="project-banner" style="background-image: url('../images/wolds.jpg'); background-size: cover; background-position: center;"></div>
 
     <div class="project-meta">
       <span class="project-tag">Engineering</span>
-      <span class="project-date">2024</span>
+      <span class="project-date">2020-2023</span>
     </div>
 
-    <h1 class="project-title">Project One — a short punchy title</h1>
+    <h1 class="project-title">WORLDS FRVR</h1>
 
-    <p class="project-summary">
-      One or two sentences that capture what this project is and why it matters. This is the hook — make it count.
+    <!-- ── Description ── -->
+    <p class="project-desc">
+      Browser based multiplayer game made in our in-house engine. Fully procedural World. Game focusing on User-Generated-Content and social features.
+      I worked on a wide range of systems, from core gameplay systems to rendering and multiplayer systems, and led the game development as game lead.
     </p>
 
-    <div class="project-section">
-      <h2>The Problem</h2>
-      <p>
-        Describe the problem you were solving. Who had this problem? How painful was it? 
-        What existed before you built this?
-      </p>
+    <!-- ── Video ── (remove this block if no video) -->
+    <div class="section-label">Video</div>
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/-_1acZzlpI4"
+        title="Project video"
+        allowfullscreen>
+      </iframe>
     </div>
 
-    <div class="project-section">
-      <h2>What I Built</h2>
-      <p>
-        Describe what you actually built. What does it do? How does it work at a high level?
-        What were the key decisions you made?
-      </p>
-      <p>
-        You can go into more depth here — a second paragraph is fine if the project warrants it.
-      </p>
-      <div class="video-wrap">
-  <iframe
-    src="https://www.youtube.com/embed/-_1acZzlpI4"
-    title="Project video"
-    frameborder="0"
-    allowfullscreen>
-  </iframe>
-</div>
+    <!-- ── Highlights ── -->
+    <div class="section-label">Highlights</div>
+    <ul class="bullet-list">
+      <li>Procedural content generation for biomes, real-time growing trees, crafting systems including tooling for 
+          our artists. </li>
+      <li>Gameplay systems for multiplayer UGC systems, such as sharing systems and world customization. </li>
+      <li>Implemented animation systems, culling systems, and GPU particles from scratch in our in-house web engine. </li>
+      <li>led cross-disciplinary teams of around 10 people developing the game from concept through live service.</li>
+      <li>Product played a key role in a multi-million dollar deal with Meta.</li>
+    </ul>
+
+    <!-- ── Screenshots ── (add/remove <img> tags as needed) -->
+    <div class="section-label">Screenshots</div>
+    <div class="screenshots">
+      <img src="../images/worlds1.jpg" alt="Screenshot 1" />
+      <img src="../images/worlds2.jpg" alt="Screenshot 2" />
+      <img src="../images/worlds3.png" alt="Screenshot 3" />
+      <img src="../images/worlds4.png" alt="Screenshot 4" />
     </div>
 
-    <div class="project-section">
-      <h2>Outcome</h2>
-      <p>
-        What happened after you shipped it? Quantify if you can — users, revenue, time saved, 
-        bug reduction. If it's a personal project, what did you learn?
-      </p>
-    </div>
-
-    <div class="project-section">
-      <h2>Stack</h2>
-      <div class="stack-tags">
-        <span class="stack-tag">React</span>
-        <span class="stack-tag">Node.js</span>
-        <span class="stack-tag">PostgreSQL</span>
-        <span class="stack-tag">TypeScript</span>
-        <span class="stack-tag">Vercel</span>
-      </div>
-    </div>
-
+    <!-- ── Links ── (remove buttons you don't need) -->
     <div class="project-links">
       <a href="https://your-live-site.com" target="_blank" class="proj-btn proj-btn-primary">Live site ↗</a>
       <a href="https://github.com/yourusername/project-one" target="_blank" class="proj-btn proj-btn-ghost">GitHub ↗</a>
