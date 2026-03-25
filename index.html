@@ -44,11 +44,10 @@
     }
 
     .logo {
-      font-family: 'Dancing Script', cursive;
+      font-family: 'Noto Sans', sans-serif;
       font-size: 1.8rem;
       color: var(--ink);
       text-decoration: none;
-      letter-spacing: 0.01em;
     }
 
     nav {
@@ -269,19 +268,13 @@
 
     .hero-btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 
-    .hero-avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #e0d8cf 0%, #c8bfb4 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Dancing Script', cursive;
-      font-size: 1.6rem;
-      color: #a09890;
-      flex-shrink: 0;
-    }
+.hero-avatar {
+  width: 256px;
+  height: 256px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
 
     /* hide hero on non-home pages */
     .hero { display: flex; }
@@ -416,7 +409,7 @@
         <a href="https://www.linkedin.com/in/jonas-aksel-billeskov-66a07a130/" target="_blank" class="hero-btn hero-btn-ghost">LinkedIn ↗</a>
       </div>
     </div>
-    <div class="hero-avatar">YN</div>
+    <img src="images/Profil.png" alt="Jonas Aksel Billeskov" class="hero-avatar">
   </div>
 
   <!-- Projects / Home -->
@@ -478,20 +471,17 @@
             </div>
           </div>
         </a>
-
-
-        <a href="projects/project-six.html" class="card">
-          <div class="card-image color-default"></div>
+                <a href="projects/project-six.html" class="card">
+          <div class="card-image" style="background-image: url('images/Bolverk.jpg'); background-size: cover; background-position: center;"></div>
           <div class="card-body">
-            <div class="card-label">Original</div>
-            <div class="card-title">Project Six — and one more</div>
-            <div class="card-desc">Brief description. Link to write-up or case study.</div>
+            <div class="card-title">Bolverk XR</div>
+            <div class="card-desc">Bolverk XR - a VR training application for cabin crew, developed for real-world aviation scenarios.</div>
             <div class="card-footer">
-              <span>2022 &nbsp; <span class="card-tag">Product</span></span>
-              <div class="card-icon">&#9638;</div>
+              <span>2019 &nbsp; <span class="card-tag">Game</span></span>
             </div>
           </div>
         </a>
+
 
       </div>
     </div>
