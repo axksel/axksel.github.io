@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name — Developer & Product Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f5f2;
+      --ink: #1a1a18;
+      --muted: #8a8880;
+      --accent: #c94a2a;
+      --rule: #e0ddd9;
+      --card-bg: #ffffff;
+      --max-w: 720px;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      line-height: 1.7;
+      padding: 0 1.5rem;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    /* ── Nav ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 5rem;
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── Hero ── */
+    .hero {
+      margin-bottom: 6rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 7vw, 4.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      color: var(--ink);
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-bio {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.4rem;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn:hover { background: var(--ink); color: var(--bg); }
+
+    .btn-ghost {
+      border-color: var(--rule);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+    /* ── Sections ── */
+    section {
+      margin-bottom: 6rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-top: 1px solid var(--rule);
+      padding-top: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .about-text p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.9;
+    }
+
+    .about-text p strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .about-skills h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .skill-list li {
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .skill-list li::before {
+      content: '—';
+      color: var(--accent);
+      font-size: 0.7rem;
+    }
+
+    /* ── Projects ── */
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 2rem;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+      cursor: pointer;
+    }
+
+    .project-item:hover .project-title { color: var(--accent); }
+
+    .project-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+      transition: color 0.2s;
+    }
+
+    .project-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .project-arrow {
+      font-size: 1.2rem;
+      color: var(--muted);
+      padding-top: 0.2rem;
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .project-item:hover .project-arrow {
+      transform: translate(3px, -3px);
+      color: var(--accent);
+    }
+
+    /* ── Experience ── */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 2rem;
+    }
+
+    .exp-date {
+      font-size: 0.72rem;
+      color: var(--muted);
+      padding-top: 0.15rem;
+      letter-spacing: 0.04em;
+    }
+
+    .exp-role {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 0.2rem;
+    }
+
+    .exp-company {
+      font-size: 0.78rem;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.04em;
+    }
+
+    .exp-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+
+    footer p {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--ink); }
+
+    /* ── Fade-in animation ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up:nth-child(1) { animation-delay: 0.05s; }
+    .fade-up:nth-child(2) { animation-delay: 0.15s; }
+    .fade-up:nth-child(3) { animation-delay: 0.25s; }
+    .fade-up:nth-child(4) { animation-delay: 0.35s; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      nav { flex-direction: column; gap: 1rem; align-items: flex-start; margin-bottom: 3rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.3rem; }
+      footer { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Nav -->
+    <nav>
+      <a href="#" class="nav-logo">Your Name</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="mailto:you@email.com">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+      <p class="hero-eyebrow fade-up">Developer & Product Manager</p>
+      <h1 class="fade-up">
+        Building things<br>that <em>actually</em><br>get used.
+      </h1>
+      <p class="hero-bio fade-up">
+        I sit at the intersection of code and product — shipping software, defining what to build next, and keeping both in sync.
+        Currently based in <strong>Copenhagen</strong>. Open to new opportunities.
+      </p>
+      <div class="hero-links fade-up">
+        <a href="#projects" class="btn">View Projects</a>
+        <a href="https://github.com/yourusername" class="btn btn-ghost" target="_blank">GitHub ↗</a>
+        <a href="https://linkedin.com/in/yourprofile" class="btn btn-ghost" target="_blank">LinkedIn ↗</a>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <p class="section-label">About</p>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm a <strong>developer and product manager</strong> with experience taking products from idea to launch. I write code, talk to users, and define roadmaps — sometimes all in the same week.
+          </p>
+          <p>
+            I care about shipping things that solve real problems, not just feature checklists. I've worked across early-stage startups and larger teams, and I'm comfortable being the person who bridges engineering and the rest of the business.
+          </p>
+          <p>
+            Outside of work I'm into <strong>[your interests here]</strong>.
+          </p>
+        </div>
+        <div class="about-skills">
+          <h3>Technical</h3>
+          <ul class="skill-list" style="margin-bottom: 1.5rem;">
+            <li>JavaScript / TypeScript</li>
+            <li>React / Node.js</li>
+            <li>Python</li>
+            <li>SQL & databases</li>
+            <li>Git & CI/CD</li>
+          </ul>
+          <h3>Product</h3>
+          <ul class="skill-list">
+            <li>Roadmap planning</li>
+            <li>User research</li>
+            <li>Stakeholder management</li>
+            <li>Data analysis</li>
+            <li>Agile / Scrum</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <p class="section-label">Selected Projects</p>
+      <div class="projects-list">
+
+        <a href="#" class="project-item">
+          <div>
+            <p class="project-tag">Product + Engineering</p>
+            <h3 class="project-title">Project One</h3>
+            <p class="project-desc">A short description of what the project does, the problem it solves, and the outcome. Keep it punchy — one or two sentences.</p>
+          </div>
+          <span class="project-arrow">↗</span>
+        </a>
+
+        <a href="#" class="project-item">
+          <div>
+            <p class="project-tag">Side Project</p>
+            <h3 class="project-title">Project Two</h3>
+            <p class="project-desc">What you built, why you built it, and what you learned. Tech stack or tools used can go here too.</p>
+          </div>
+          <span class="project-arrow">↗</span>
+        </a>
+
+        <a href="#" class="project-item">
+          <div>
+            <p class="project-tag">Open Source</p>
+            <h3 class="project-title">Project Three</h3>
+            <p class="project-desc">Brief description. Link to GitHub, live demo, or case study write-up.</p>
+          </div>
+          <span class="project-arrow">↗</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <p class="section-label">Work Experience</p>
+      <div class="exp-list">
+
+        <div class="exp-item">
+          <span class="exp-date">2022 — Present</span>
+          <div>
+            <h3 class="exp-role">Senior Product Manager</h3>
+            <p class="exp-company">Company Name</p>
+            <p class="exp-desc">What you worked on, what you shipped, what impact it had. Quantify where you can — users, revenue, time saved. 2–3 sentences is plenty.</p>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <span class="exp-date">2019 — 2022</span>
+          <div>
+            <h3 class="exp-role">Full Stack Developer</h3>
+            <p class="exp-company">Another Company</p>
+            <p class="exp-desc">Stack, scale, and scope. What problems you solved and how you grew. Focus on outcomes, not just responsibilities.</p>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <span class="exp-date">2017 — 2019</span>
+          <div>
+            <h3 class="exp-role">Junior Developer</h3>
+            <p class="exp-company">Earlier Company</p>
+            <p class="exp-desc">Where you started, what you learned, and how you levelled up.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 Your Name</p>
+      <div class="footer-links">
+        <a href="mailto:you@email.com">Email</a>
+        <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
