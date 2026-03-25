@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Name — Developer & PM</title>
+  <title>Jonas Aksel Billeskov - Game Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Noto+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
       --border: #e6e8f0;
     }
 
-    html { font-size: 15px; }
+    html { font-size: 18px; }
 
     body {
       background: var(--bg);
@@ -391,12 +391,12 @@
 <body>
 
   <header>
-    <a class="logo" href="#">YourName</a>
+    <a class="logo" href="#">Jonas Aksel Billeskov</a>
     <nav>
       <a href="#" class="active" data-page="projects">Home</a>
       <a href="#" data-page="about">About</a>
       <a href="#" data-page="experience">Experience</a>
-      <a href="/cdn-cgi/l/email-protection#1960766c597c74787075377a7674">Contact</a>
+      <a href="mailto:jonas.aksel@gmail.com">Contact</a>
     </nav>
   </header>
 
@@ -409,10 +409,9 @@
          HLSL and JavaScript experience. I started my career writing gameplay systems, procedural generation 
          systems, engine tooling and shaders - then leading game development as a technical and game lead, which 
          gave me a broad understanding of the full development cycle. From low-level rendering to player-facing 
-         systems to live game performance. I'm returning to a hands-on development role because it's where I do my 
-         most satisfying work. </p>
+         systems to live game performance.</p>
       <div class="hero-links">
-        <a href="/cdn-cgi/l/email-protection#156c7a60557078747c793b767a78" class="hero-btn hero-btn-primary">Get in touch</a>
+        <a href="mailto:jonas.aksel@gmail.com" class="hero-btn hero-btn-primary">Get in touch</a>
         <a href="https://github.com/axksel" target="_blank" class="hero-btn hero-btn-ghost">GitHub ↗</a>
         <a href="https://www.linkedin.com/in/jonas-aksel-billeskov-66a07a130/" target="_blank" class="hero-btn hero-btn-ghost">LinkedIn ↗</a>
       </div>
@@ -426,14 +425,12 @@
       <div class="card-grid">
 
         <a href="projects/project-one.html" class="card">
-          <div class="card-image color-default"></div>
+          <div class="card-image" style="background-image: url('images/worlds.jpg'); background-size: cover; background-position: center;"></div>
           <div class="card-body">
-            <div class="card-label">Original</div>
-            <div class="card-title">Project One — a short punchy title</div>
-            <div class="card-desc">What it does and the problem it solves. Keep this to one or two sentences.</div>
+            <div class="card-title">WORLDS FRVR</div>
+            <div class="card-desc">A block building game where you get to create amazing multiplayer worlds.</div>
             <div class="card-footer">
               <span>2024 &nbsp; <span class="card-tag">Engineering</span></span>
-              <div class="card-icon">&#9638;</div>
             </div>
           </div>
         </a>
@@ -577,10 +574,10 @@
   </div>
 
   <footer>
-    <p>© 2026 Your Name &nbsp;·&nbsp;
-      <a href="https://github.com/yourusername" target="_blank">GitHub</a> &nbsp;·&nbsp;
-      <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
-      <a href="/cdn-cgi/l/email-protection#067f697346636b676f6a2865696b">Email</a>
+    <p>© 2026 Jonas Aksel Billeskov &nbsp;·&nbsp;
+      <a href="https://github.com/axksel" target="_blank">GitHub</a> &nbsp;·&nbsp;
+      <a href="https://www.linkedin.com/in/jonas-aksel-billeskov-66a07a130/" target="_blank">LinkedIn</a> &nbsp;·&nbsp;
+      <a href="mailto:jonas.aksel@gmail.com">Email</a>
     </p>
   </footer>
 
@@ -596,3 +593,5 @@
         navLinks.forEach(l => l.classList.remove('active'));
         pages.forEach(p => p.classList.remove('active'));
         link.classList.add('active');
+      }
+      );});
